@@ -1,16 +1,17 @@
 
-import http, { IncomingMessage, ServerResponse } from "node:http";
+import http from "node:http";
+import Koa from "koa";
 
 export function createServer(): http.Server {
-  return http.createServer((request: IncomingMessage, response: ServerResponse) => {
-    if (request.method === "GET" && request.url === "/health") {
-      response.writeHead(200, { "content-type": "application/json" });
-      response.end(JSON.stringify({ status: "ok" }));
+  const app = new Koa();
+  app.use(async (context, next) => {
+    if (context.method === "GET" && context.path === "/health") {
+      context.body = { status: "ok" };
       return;
     }
-    response.writeHead(404, { "content-type": "application/json" });
-    response.end(JSON.stringify({ error: "not_found" }));
+    await next();
   });
+  return http.createServer(app.callback());
 }
 
 if (process.argv[1]?.endsWith("/server.js")) {

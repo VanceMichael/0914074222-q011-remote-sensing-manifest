@@ -9,8 +9,12 @@
     "migrate": "node scripts/migrate.js",
     "test": "npm run build && node --test dist/server.test.js"
   },
+  "dependencies": {
+    "koa": "2.16.2"
+  },
   "devDependencies": {
     "@types/node": "22.15.3",
+    "@types/koa": "2.15.0",
     "typescript": "5.8.3"
   }
 }
