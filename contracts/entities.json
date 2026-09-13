@@ -1,0 +1,12 @@
+{
+  "schema_version": "1",
+  "required_fields": [
+    "product_ref",
+    "recipient_ref",
+    "file_digest",
+    "file_kind",
+    "received_at"
+  ],
+  "time_format": "ISO-8601 with offset",
+  "digest_format": "sha256:<hex>"
+}
